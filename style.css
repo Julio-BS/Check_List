@@ -1,0 +1,737 @@
+/* =========================================
+   CONFIGURACIÓN GENERAL
+   ========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+
+body {
+    margin: 0;
+    padding: 25px;
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f4f4;
+
+    color: #000000;
+}
+
+
+
+/* =========================================
+   CONTENEDOR GENERAL
+   ========================================= */
+
+.contenedor {
+    width: 100%;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    gap: 18px;
+
+    flex-wrap: wrap;
+}
+
+
+/* =========================================
+   SECCIONES
+   ========================================= */
+
+.seccion {
+    background-color: #ffffff;
+
+    border-radius: 10px;
+
+    box-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+
+
+/* =========================================
+   SECCIÓN MATRICES
+   ========================================= */
+
+.seccion-matrices {
+    width: 260px;
+
+    padding: 18px;
+}
+
+
+
+/* =========================================
+   TÍTULO
+   ========================================= */
+
+.seccion-matrices h2 {
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+    text-align: center;
+
+    color: #000000;
+}
+
+
+
+/* =========================================
+   LISTA DE TAREAS
+   ========================================= */
+
+.lista-tareas {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+
+/* =========================================
+   FILA DE CADA TAREA
+   ========================================= */
+
+.tarea {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: flex-start;
+
+    gap: 7px;
+
+    width: 100%;
+}
+
+
+
+/* =========================================
+   NOMBRE DE LA TAREA
+   ========================================= */
+
+.nombre-tarea {
+    flex: 1;
+
+    padding: 8px 10px;
+
+    border-radius: 5px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #000000;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+
+
+/* =========================================
+   COLOR DEL NOMBRE
+   SEGÚN EL ESTADO
+   ========================================= */
+
+
+/* F = FALTA */
+
+.tarea.sin-completar .nombre-tarea {
+    background-color: #f8b4b4;
+}
+
+
+/* P = EN PROCESO */
+
+.tarea.en-proceso .nombre-tarea {
+    background-color: #ffc875;
+}
+
+
+/* C = COMPLETADO */
+
+.tarea.completado .nombre-tarea {
+    background-color: #9edba8;
+}
+
+
+
+/* =========================================
+   CONTENEDOR DEL BOTÓN
+   ========================================= */
+
+.estado {
+    position: relative;
+
+    width: 36px;
+
+    min-width: 36px;
+}
+
+
+
+/* =========================================
+   BOTÓN F / P / C
+   ========================================= */
+
+.boton-estado {
+    width: 36px;
+
+    height: 34px;
+
+    padding: 0;
+
+    border: 1px solid #777777;
+
+    border-radius: 5px;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    color: #000000;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+
+
+/* =========================================
+   EFECTO AL PASAR EL MOUSE
+   ========================================= */
+
+.boton-estado:hover {
+    transform: scale(1.05);
+
+    box-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.20);
+}
+
+
+
+/* =========================================
+   COLOR DEL BOTÓN PRINCIPAL
+   ========================================= */
+
+
+/* FALTA */
+
+.tarea.sin-completar .boton-estado {
+    background-color: #ef8f8f;
+}
+
+
+/* EN PROCESO */
+
+.tarea.en-proceso .boton-estado {
+    background-color: #f5a742;
+}
+
+
+/* COMPLETADO */
+
+.tarea.completado .boton-estado {
+    background-color: #66c779;
+}
+
+
+
+/* =========================================
+   MENÚ DESPLEGABLE
+   ========================================= */
+
+.menu-estado {
+    display: none;
+
+    position: absolute;
+
+    top: 37px;
+
+    left: 0;
+
+    width: 36px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #bbbbbb;
+
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    z-index: 100;
+
+    box-shadow:
+        0 3px 8px rgba(0, 0, 0, 0.20);
+}
+
+
+
+/* =========================================
+   MENÚ ABIERTO
+   ========================================= */
+
+.menu-estado.activo {
+    display: block;
+}
+
+
+
+/* =========================================
+   BOTONES F / P / C DEL MENÚ
+   ========================================= */
+
+.menu-estado button {
+    width: 100%;
+
+    height: 32px;
+
+    padding: 0;
+
+    border: none;
+
+    border-bottom:
+        1px solid rgba(0, 0, 0, 0.08);
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #000000;
+
+    text-align: center;
+
+    cursor: pointer;
+}
+
+
+
+/* =========================================
+   ÚLTIMO BOTÓN SIN BORDE
+   ========================================= */
+
+.menu-estado button:last-child {
+    border-bottom: none;
+}
+
+
+
+/* =========================================
+   COLOR DE CADA OPCIÓN
+   ========================================= */
+
+
+/* F */
+
+.menu-estado button[data-estado="sin-completar"] {
+    background-color: #ef8f8f;
+}
+
+
+/* P */
+
+.menu-estado button[data-estado="en-proceso"] {
+    background-color: #f5a742;
+}
+
+
+/* C */
+
+.menu-estado button[data-estado="completado"] {
+    background-color: #66c779;
+}
+
+
+
+/* =========================================
+   EFECTO DEL MENÚ
+   ========================================= */
+
+.menu-estado button:hover {
+    filter: brightness(0.92);
+}
+
+
+
+/* =========================================
+   ADAPTACIÓN PARA PANTALLAS PEQUEÑAS
+   ========================================= */
+
+@media (max-width: 400px) {
+
+    body {
+        padding: 12px;
+    }
+
+
+    .seccion-matrices {
+        width: 100%;
+    }
+
+}
+/* =========================================
+   SECCIÓN 2 - DOWNLOAD
+   ========================================= */
+
+
+.seccion-download {
+
+    width: 250px;
+
+    padding: 18px;
+}
+
+
+
+/* =========================================
+   TÍTULO DOWNLOAD
+   ========================================= */
+
+.seccion-download h2 {
+
+    margin-top: 0;
+
+    margin-bottom: 15px;
+
+    font-size: 18px;
+
+    text-align: center;
+
+    color: #000000;
+}
+
+
+
+/* =========================================
+   CONTENEDOR DE LAS 3 CATEGORÍAS
+   ========================================= */
+
+.download-categorias {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+
+/* =========================================
+   CADA CATEGORÍA
+   ========================================= */
+
+.download-categoria {
+
+    width: 100%;
+
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+
+/* La última no necesita línea */
+
+.download-categoria:last-child {
+
+    border-bottom: none;
+
+}
+
+
+
+/* =========================================
+   CABECERA
+   ADAS / GEOCERCA / 80 KM
+   ========================================= */
+
+.download-cabecera {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+}
+
+
+
+/* =========================================
+   NOMBRE DE LA CATEGORÍA
+   ========================================= */
+
+.download-nombre {
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    color: #000000;
+}
+
+
+
+/* =========================================
+   BOTÓN SELECCIONAR
+   ========================================= */
+
+.btn-seleccionar-unidades {
+
+    padding: 5px 8px;
+
+    border: 1px solid #aaaaaa;
+
+    border-radius: 5px;
+
+    background-color: #ffffff;
+
+    color: #000000;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.btn-seleccionar-unidades:hover {
+
+    background-color: #eeeeee;
+}
+
+
+
+/* =========================================
+   PANEL PARA SELECCIONAR 2501 - 2510
+   ========================================= */
+
+.selector-unidades {
+
+    display: none;
+
+    margin-top: 9px;
+
+    padding: 9px;
+
+    background-color: #f7f7f7;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 6px;
+}
+
+
+
+/* Cuando está abierto */
+
+.selector-unidades.activo {
+
+    display: block;
+}
+
+
+
+/* =========================================
+   CUADRÍCULA DE UNIDADES
+   ========================================= */
+
+.grid-unidades {
+
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 6px;
+}
+
+
+
+/* =========================================
+   CHECKBOX + NÚMERO
+   ========================================= */
+
+
+.unidad-check {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 12px;
+
+    color: #000000;
+
+    cursor: pointer;
+}
+
+
+
+/* =========================================
+   BOTÓN CONFIRMAR
+   ========================================= */
+
+.btn-confirmar-unidades {
+
+    width: 100%;
+
+    margin-top: 10px;
+
+    padding: 6px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background-color: #e2e2e2;
+
+    color: #000000;
+
+    font-weight: bold;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.btn-confirmar-unidades:hover {
+
+    background-color: #d4d4d4;
+}
+
+
+
+/* =========================================
+   UNIDADES YA SELECCIONADAS
+   ========================================= */
+
+.unidades-seleccionadas {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 6px;
+
+    margin-top: 8px;
+}
+
+
+
+/* =========================================
+   FILA DE UNA UNIDAD
+   ========================================= */
+
+.download-unidad {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+
+/* =========================================
+   BOTÓN F / C
+   ========================================= */
+
+.download-boton-estado {
+
+    width: 32px;
+
+    height: 30px;
+
+    padding: 0;
+
+    border: 1px solid #777777;
+
+    border-radius: 5px;
+
+    color: #000000;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+
+/* =========================================
+   NÚMERO DE UNIDAD
+   ========================================= */
+
+.download-numero {
+
+    flex: 1;
+
+    padding: 6px 9px;
+
+    border-radius: 5px;
+
+    color: #000000;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+
+/* =========================================
+   ESTADO F = FALTANTE
+   ========================================= */
+
+.download-unidad.sin-completar
+.download-boton-estado {
+
+    background-color: #ef8f8f;
+}
+
+
+.download-unidad.sin-completar
+.download-numero {
+
+    background-color: #f8b4b4;
+}
+
+
+
+/* =========================================
+   ESTADO C = COMPLETADO
+   ========================================= */
+
+.download-unidad.completado
+.download-boton-estado {
+
+    background-color: #66c779;
+}
+
+
+.download-unidad.completado
+.download-numero {
+
+    background-color: #9edba8;
+}
