@@ -1,6 +1,6 @@
-/* =========================================
+/* =====================================================
    CONFIGURACIÓN GENERAL
-   ========================================= */
+   ===================================================== */
 
 * {
     box-sizing: border-box;
@@ -9,7 +9,7 @@
 
 body {
     margin: 0;
-    padding: 25px;
+    padding: 24px;
 
     font-family: Arial, sans-serif;
 
@@ -20,26 +20,34 @@ body {
 
 
 
-/* =========================================
-   CONTENEDOR GENERAL
-   ========================================= */
+/* =====================================================
+   DISTRIBUCIÓN GENERAL
+   ===================================================== */
 
 .contenedor {
     width: 100%;
+    max-width: 1140px;
 
-    display: flex;
+    margin: 0 auto;
 
-    align-items: flex-start;
+    display: grid;
 
-    gap: 18px;
+    grid-template-columns:
+        320px 420px 320px;
 
-    flex-wrap: wrap;
+    grid-template-areas:
+        "matrices turno download";
+
+    gap: 20px;
+
+    align-items: start;
 }
 
 
-/* =========================================
+
+/* =====================================================
    SECCIONES
-   ========================================= */
+   ===================================================== */
 
 .seccion {
     background-color: #ffffff;
@@ -52,39 +60,27 @@ body {
 
 
 
-/* =========================================
-   SECCIÓN MATRICES
-   ========================================= */
+/* =====================================================
+   MATRICES
+   ===================================================== */
 
 .seccion-matrices {
-    width: 260px;
+    grid-area: matrices;
 
     padding: 18px;
 }
 
 
-
-/* =========================================
-   TÍTULO
-   ========================================= */
-
-.seccion-matrices h2 {
+.seccion-matrices h2,
+.seccion-download h2 {
     margin-top: 0;
-
     margin-bottom: 15px;
 
     font-size: 18px;
 
     text-align: center;
-
-    color: #000000;
 }
 
-
-
-/* =========================================
-   LISTA DE TAREAS
-   ========================================= */
 
 .lista-tareas {
     display: flex;
@@ -95,28 +91,14 @@ body {
 }
 
 
-
-/* =========================================
-   FILA DE CADA TAREA
-   ========================================= */
-
 .tarea {
     display: flex;
 
     align-items: center;
 
-    justify-content: flex-start;
-
     gap: 7px;
-
-    width: 100%;
 }
 
-
-
-/* =========================================
-   NOMBRE DE LA TAREA
-   ========================================= */
 
 .nombre-tarea {
     flex: 1;
@@ -128,37 +110,25 @@ body {
     font-size: 13px;
 
     font-weight: bold;
-
-    color: #000000;
-
-    transition:
-        background-color 0.2s ease,
-        transform 0.2s ease;
 }
 
 
 
-/* =========================================
-   COLOR DEL NOMBRE
-   SEGÚN EL ESTADO
-   ========================================= */
-
-
-/* F = FALTA */
+/* MATRICES F */
 
 .tarea.sin-completar .nombre-tarea {
     background-color: #f8b4b4;
 }
 
 
-/* P = EN PROCESO */
+/* MATRICES P */
 
 .tarea.en-proceso .nombre-tarea {
     background-color: #ffc875;
 }
 
 
-/* C = COMPLETADO */
+/* MATRICES C */
 
 .tarea.completado .nombre-tarea {
     background-color: #9edba8;
@@ -166,9 +136,9 @@ body {
 
 
 
-/* =========================================
-   CONTENEDOR DEL BOTÓN
-   ========================================= */
+/* =====================================================
+   BOTÓN MATRICES
+   ===================================================== */
 
 .estado {
     position: relative;
@@ -179,14 +149,8 @@ body {
 }
 
 
-
-/* =========================================
-   BOTÓN F / P / C
-   ========================================= */
-
 .boton-estado {
     width: 36px;
-
     height: 34px;
 
     padding: 0;
@@ -195,54 +159,25 @@ body {
 
     border-radius: 5px;
 
+    color: #000000;
+
     font-size: 14px;
 
     font-weight: bold;
 
-    color: #000000;
-
     cursor: pointer;
-
-    transition:
-        transform 0.15s ease,
-        box-shadow 0.15s ease;
 }
 
-
-
-/* =========================================
-   EFECTO AL PASAR EL MOUSE
-   ========================================= */
-
-.boton-estado:hover {
-    transform: scale(1.05);
-
-    box-shadow:
-        0 2px 5px rgba(0, 0, 0, 0.20);
-}
-
-
-
-/* =========================================
-   COLOR DEL BOTÓN PRINCIPAL
-   ========================================= */
-
-
-/* FALTA */
 
 .tarea.sin-completar .boton-estado {
     background-color: #ef8f8f;
 }
 
 
-/* EN PROCESO */
-
 .tarea.en-proceso .boton-estado {
     background-color: #f5a742;
 }
 
-
-/* COMPLETADO */
 
 .tarea.completado .boton-estado {
     background-color: #66c779;
@@ -250,9 +185,9 @@ body {
 
 
 
-/* =========================================
-   MENÚ DESPLEGABLE
-   ========================================= */
+/* =====================================================
+   MENÚ MATRICES
+   ===================================================== */
 
 .menu-estado {
     display: none;
@@ -260,12 +195,9 @@ body {
     position: absolute;
 
     top: 37px;
-
     left: 0;
 
     width: 36px;
-
-    background-color: #ffffff;
 
     border: 1px solid #bbbbbb;
 
@@ -280,76 +212,38 @@ body {
 }
 
 
-
-/* =========================================
-   MENÚ ABIERTO
-   ========================================= */
-
 .menu-estado.activo {
     display: block;
 }
 
 
-
-/* =========================================
-   BOTONES F / P / C DEL MENÚ
-   ========================================= */
-
 .menu-estado button {
     width: 100%;
-
     height: 32px;
 
     padding: 0;
 
     border: none;
 
-    border-bottom:
-        1px solid rgba(0, 0, 0, 0.08);
+    color: #000000;
 
     font-size: 13px;
 
     font-weight: bold;
 
-    color: #000000;
-
-    text-align: center;
-
     cursor: pointer;
 }
 
-
-
-/* =========================================
-   ÚLTIMO BOTÓN SIN BORDE
-   ========================================= */
-
-.menu-estado button:last-child {
-    border-bottom: none;
-}
-
-
-
-/* =========================================
-   COLOR DE CADA OPCIÓN
-   ========================================= */
-
-
-/* F */
 
 .menu-estado button[data-estado="sin-completar"] {
     background-color: #ef8f8f;
 }
 
 
-/* P */
-
 .menu-estado button[data-estado="en-proceso"] {
     background-color: #f5a742;
 }
 
-
-/* C */
 
 .menu-estado button[data-estado="completado"] {
     background-color: #66c779;
@@ -357,111 +251,445 @@ body {
 
 
 
-/* =========================================
-   EFECTO DEL MENÚ
-   ========================================= */
+/* =====================================================
+   TURNO
+   ===================================================== */
 
-.menu-estado button:hover {
-    filter: brightness(0.92);
+.seccion-turno {
+    grid-area: turno;
+
+    padding: 22px;
 }
 
 
+.turno-titulo {
+    display: flex;
 
-/* =========================================
-   ADAPTACIÓN PARA PANTALLAS PEQUEÑAS
-   ========================================= */
+    justify-content: space-between;
 
-@media (max-width: 400px) {
+    align-items: center;
 
-    body {
-        padding: 12px;
-    }
-
-
-    .seccion-matrices {
-        width: 100%;
-    }
-
-}
-/* =========================================
-   SECCIÓN 2 - DOWNLOAD
-   ========================================= */
-
-
-.seccion-download {
-
-    width: 250px;
-
-    padding: 18px;
+    margin-bottom: 20px;
 }
 
 
-
-/* =========================================
-   TÍTULO DOWNLOAD
-   ========================================= */
-
-.seccion-download h2 {
-
-    margin-top: 0;
-
-    margin-bottom: 15px;
+.turno-titulo h2 {
+    margin: 0;
 
     font-size: 18px;
+}
 
-    text-align: center;
+
+#selector-turno {
+    min-width: 105px;
+
+    padding: 7px 10px;
+
+    border: 1px solid #999999;
+
+    border-radius: 5px;
+
+    background-color: white;
 
     color: #000000;
+
+    font-size: 12px;
+
+    font-weight: bold;
 }
 
 
 
-/* =========================================
-   CONTENEDOR DE LAS 3 CATEGORÍAS
-   ========================================= */
+/* =====================================================
+   CONTENIDO TURNO
+   ===================================================== */
 
-.download-categorias {
-
+.contenido-turno {
     display: flex;
 
     flex-direction: column;
 
-    gap: 14px;
+    gap: 16px;
+}
+
+
+.oculto {
+    display: none !important;
 }
 
 
 
-/* =========================================
-   CADA CATEGORÍA
-   ========================================= */
+/* =====================================================
+   FILA TURNO
+   ===================================================== */
 
-.download-categoria {
+.turno-fila {
+    display: flex;
 
+    align-items: center;
+
+    gap: 8px;
+}
+
+
+.turno-boton-fc,
+.turno-indicador-general {
+    width: 40px;
+    height: 36px;
+
+    min-width: 40px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 0;
+
+    border: 1px solid #777777;
+
+    border-radius: 5px;
+
+    color: #000000;
+
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
+
+.turno-boton-fc {
+    cursor: pointer;
+}
+
+
+.turno-etiqueta {
+    flex: 1;
+
+    padding: 10px 12px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+
+/* =====================================================
+   FALTANTE / COMPLETADO TURNO
+   ===================================================== */
+
+.turno-faltante .turno-boton-fc,
+.turno-faltante .turno-indicador-general {
+    background-color: #ef8f8f;
+}
+
+
+.turno-faltante .turno-etiqueta {
+    background-color: #f8b4b4;
+}
+
+
+.turno-completado .turno-boton-fc,
+.turno-completado .turno-indicador-general {
+    background-color: #66c779;
+}
+
+
+.turno-completado .turno-etiqueta {
+    background-color: #9edba8;
+}
+
+
+
+/* =====================================================
+   ORDEN DE CONDUCTORES
+   ===================================================== */
+
+.bloque-orden-conductores {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.btn-seleccionar-conductores {
+    align-self: flex-start;
+
+    margin-left: 48px;
+
+    padding: 6px 9px;
+
+    border: 1px solid #aaaaaa;
+
+    border-radius: 5px;
+
+    background-color: #ffffff;
+
+    color: #000000;
+
+    font-size: 11px;
+
+    cursor: pointer;
+}
+
+
+.btn-seleccionar-conductores:hover {
+    background-color: #eeeeee;
+}
+
+
+
+/* SELECTOR */
+
+.selector-conductores {
+    display: none;
+
+    margin-left: 48px;
+
+    padding: 10px;
+
+    border: 1px solid #dddddd;
+
+    border-radius: 6px;
+
+    background-color: #f7f7f7;
+}
+
+
+.selector-conductores.activo {
+    display: block;
+}
+
+
+.grid-conductores {
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, 1fr);
+
+    gap: 7px;
+}
+
+
+.conductor-check {
+    display: flex;
+
+    align-items: center;
+
+    gap: 5px;
+
+    font-size: 12px;
+
+    cursor: pointer;
+}
+
+
+.btn-confirmar-conductores {
     width: 100%;
 
-    padding-bottom: 10px;
+    margin-top: 10px;
 
-    border-bottom: 1px solid #eeeeee;
+    padding: 6px;
+
+    border: none;
+
+    border-radius: 5px;
+
+    background-color: #dddddd;
+
+    color: #000000;
+
+    font-weight: bold;
+
+    cursor: pointer;
 }
 
 
 
-/* La última no necesita línea */
+/* =====================================================
+   CONDUCTORES SELECCIONADOS
+   ===================================================== */
 
-.download-categoria:last-child {
+.conductores-seleccionados {
+    display: flex;
 
-    border-bottom: none;
+    flex-direction: column;
 
+    gap: 6px;
+
+    margin-left: 48px;
+}
+
+
+.turno-unidad {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+}
+
+
+.turno-unidad button {
+    width: 34px;
+    height: 30px;
+
+    padding: 0;
+
+    border: 1px solid #777777;
+
+    border-radius: 5px;
+
+    color: #000000;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.turno-unidad span {
+    flex: 1;
+
+    padding: 7px 9px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.turno-unidad.faltante button {
+    background-color: #ef8f8f;
+}
+
+
+.turno-unidad.faltante span {
+    background-color: #f8b4b4;
+}
+
+
+.turno-unidad.completado button {
+    background-color: #66c779;
+}
+
+
+.turno-unidad.completado span {
+    background-color: #9edba8;
 }
 
 
 
-/* =========================================
-   CABECERA
-   ADAS / GEOCERCA / 80 KM
-   ========================================= */
+/* =====================================================
+   CREAR
+   ===================================================== */
 
-.download-cabecera {
+.bloque-crear {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 7px;
+}
+
+
+.crear-subtarea {
+    margin-left: 25px;
+}
+
+
+
+/* =====================================================
+   PREGUNTAS
+   ===================================================== */
+
+.bloque-reloj,
+.bloque-eddy {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 9px;
+}
+
+
+.pregunta-etiqueta {
+    padding: 10px 12px;
+
+    border-radius: 5px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+}
+
+
+.estado-rojo {
+    background-color: #f8b4b4;
+}
+
+
+.estado-verde {
+    background-color: #9edba8;
+}
+
+
+
+/* =====================================================
+   SÍ / NO
+   ===================================================== */
+
+.opciones-si-no {
+    display: flex;
+
+    gap: 7px;
+}
+
+
+.opciones-si-no button {
+    min-width: 52px;
+
+    padding: 6px 10px;
+
+    border: 1px solid #999999;
+
+    border-radius: 5px;
+
+    background-color: #ffffff;
+
+    color: #000000;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+
+.opciones-si-no button.seleccionado {
+    background-color: #dddddd;
+
+    border-color: #444444;
+}
+
+
+
+/* =====================================================
+   PREGUNTAS COMPACTAS
+   ===================================================== */
+
+.pregunta-reloj,
+.eddy-pregunta {
+    min-height: 34px;
 
     display: flex;
 
@@ -473,28 +701,91 @@ body {
 }
 
 
+.pregunta-reloj span,
+.eddy-pregunta span {
+    flex: 1;
 
-/* =========================================
-   NOMBRE DE LA CATEGORÍA
-   ========================================= */
-
-.download-nombre {
-
-    font-size: 13px;
+    font-size: 11px;
 
     font-weight: bold;
-
-    color: #000000;
 }
 
 
 
-/* =========================================
-   BOTÓN SELECCIONAR
-   ========================================= */
+/* =====================================================
+   BOTÓN VOLVER
+   ===================================================== */
+
+.btn-volver-pregunta {
+    width: 30px;
+    height: 28px;
+
+    padding: 0;
+
+    border: 1px solid #aaaaaa;
+
+    border-radius: 5px;
+
+    background-color: #ffffff;
+
+    color: #000000;
+
+    cursor: pointer;
+}
+
+
+
+/* =====================================================
+   DOWNLOAD
+   ===================================================== */
+
+.seccion-download {
+    grid-area: download;
+
+    padding: 18px;
+}
+
+
+.download-categorias {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 14px;
+}
+
+
+.download-categoria {
+    padding-bottom: 10px;
+
+    border-bottom: 1px solid #eeeeee;
+}
+
+
+.download-categoria:last-child {
+    border-bottom: none;
+}
+
+
+.download-cabecera {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 8px;
+}
+
+
+.download-nombre {
+    font-size: 13px;
+
+    font-weight: bold;
+}
+
 
 .btn-seleccionar-unidades {
-
     padding: 5px 8px;
 
     border: 1px solid #aaaaaa;
@@ -511,65 +802,40 @@ body {
 }
 
 
-.btn-seleccionar-unidades:hover {
 
-    background-color: #eeeeee;
-}
-
-
-
-/* =========================================
-   PANEL PARA SELECCIONAR 2501 - 2510
-   ========================================= */
+/* SELECTOR DOWNLOAD */
 
 .selector-unidades {
-
     display: none;
 
     margin-top: 9px;
 
     padding: 9px;
 
-    background-color: #f7f7f7;
-
     border: 1px solid #dddddd;
 
     border-radius: 6px;
+
+    background-color: #f7f7f7;
 }
 
 
-
-/* Cuando está abierto */
-
 .selector-unidades.activo {
-
     display: block;
 }
 
 
-
-/* =========================================
-   CUADRÍCULA DE UNIDADES
-   ========================================= */
-
 .grid-unidades {
-
     display: grid;
 
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns:
+        repeat(2, 1fr);
 
     gap: 6px;
 }
 
 
-
-/* =========================================
-   CHECKBOX + NÚMERO
-   ========================================= */
-
-
 .unidad-check {
-
     display: flex;
 
     align-items: center;
@@ -577,20 +843,10 @@ body {
     gap: 5px;
 
     font-size: 12px;
-
-    color: #000000;
-
-    cursor: pointer;
 }
 
 
-
-/* =========================================
-   BOTÓN CONFIRMAR
-   ========================================= */
-
 .btn-confirmar-unidades {
-
     width: 100%;
 
     margin-top: 10px;
@@ -603,29 +859,16 @@ body {
 
     background-color: #e2e2e2;
 
-    color: #000000;
-
     font-weight: bold;
-
-    font-size: 11px;
 
     cursor: pointer;
 }
 
 
-.btn-confirmar-unidades:hover {
 
-    background-color: #d4d4d4;
-}
-
-
-
-/* =========================================
-   UNIDADES YA SELECCIONADAS
-   ========================================= */
+/* DOWNLOAD SELECCIONADO */
 
 .unidades-seleccionadas {
-
     display: flex;
 
     flex-direction: column;
@@ -636,13 +879,7 @@ body {
 }
 
 
-
-/* =========================================
-   FILA DE UNA UNIDAD
-   ========================================= */
-
 .download-unidad {
-
     display: flex;
 
     align-items: center;
@@ -651,15 +888,8 @@ body {
 }
 
 
-
-/* =========================================
-   BOTÓN F / C
-   ========================================= */
-
 .download-boton-estado {
-
     width: 32px;
-
     height: 30px;
 
     padding: 0;
@@ -670,28 +900,18 @@ body {
 
     color: #000000;
 
-    font-size: 13px;
-
     font-weight: bold;
 
     cursor: pointer;
 }
 
 
-
-/* =========================================
-   NÚMERO DE UNIDAD
-   ========================================= */
-
 .download-numero {
-
     flex: 1;
 
     padding: 6px 9px;
 
     border-radius: 5px;
-
-    color: #000000;
 
     font-size: 12px;
 
@@ -699,39 +919,70 @@ body {
 }
 
 
-
-/* =========================================
-   ESTADO F = FALTANTE
-   ========================================= */
-
 .download-unidad.sin-completar
 .download-boton-estado {
-
     background-color: #ef8f8f;
 }
 
 
 .download-unidad.sin-completar
 .download-numero {
-
     background-color: #f8b4b4;
 }
 
 
-
-/* =========================================
-   ESTADO C = COMPLETADO
-   ========================================= */
-
 .download-unidad.completado
 .download-boton-estado {
-
     background-color: #66c779;
 }
 
 
 .download-unidad.completado
 .download-numero {
-
     background-color: #9edba8;
+}
+
+
+
+/* =====================================================
+   RESPONSIVE
+   ===================================================== */
+
+@media (max-width: 1100px) {
+
+    .contenedor {
+        grid-template-columns:
+            1fr 1.25fr;
+
+        grid-template-areas:
+            "matrices turno"
+            "download turno";
+    }
+
+}
+
+
+@media (max-width: 720px) {
+
+    body {
+        padding: 12px;
+    }
+
+
+    .contenedor {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "matrices"
+            "turno"
+            "download";
+    }
+
+
+    .btn-seleccionar-conductores,
+    .selector-conductores,
+    .conductores-seleccionados {
+        margin-left: 0;
+    }
+
 }
