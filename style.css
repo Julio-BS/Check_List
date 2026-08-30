@@ -35,7 +35,7 @@
     --rojo: #ef4a4a;
     --rojo-bg: #3a1a1c;
     --rojo-text: #ffb3ae;
-
+ /*
     --ambar: #f5a623;
     --ambar-bg: #3a2a12;
     --ambar-text: #ffd28a;
@@ -43,6 +43,14 @@
     --verde: #29c979;
     --verde-bg: #123626;
     --verde-text: #92f0c1;
+    */
+   --ambar: #ff7a1a;
+    --ambar-bg: #6b2c00;
+    --ambar-text: #ffa254;
+
+    --verde: #2ea44f;
+    --verde-bg: #0a4a2e;
+    --verde-text: #3dffa0;
 
     --radius-sm: 6px;
     --radius-md: 10px;
@@ -319,13 +327,18 @@ body.tema-dia {
     border-color: #ef4a4a2e;
 }
 
-
+/*
 .tarea.en-proceso .nombre-tarea {
     background-color: var(--ambar-bg);
     color: var(--ambar-text);
     border-color: #f5a6232e;
 }
-
+*/
+.tarea.en-proceso .nombre-tarea {
+    background-color: var(--ambar);
+    color: #201007;
+    border-color: transparent;
+}
 
 .tarea.completado .nombre-tarea {
     background-color: var(--verde-bg);
@@ -392,13 +405,20 @@ body.tema-dia {
 
 
 /* P = ámbar */
+/*
 .tarea.en-proceso .boton-estado {
     background-color: var(--ambar-bg);
     border-color: #f5a62355;
     color: var(--ambar-text);
     box-shadow: 0 0 0 3px #f5a62314, 0 0 10px -2px #f5a62380;
 }
-
+*/
+    .tarea.en-proceso .boton-estado {
+    background-color: var(--ambar);
+    border-color: transparent;
+    color: #201007;
+    box-shadow: 0 0 12px -2px var(--ambar);
+}
 
 /* C = verde */
 .tarea.completado .boton-estado,
