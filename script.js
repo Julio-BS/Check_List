@@ -497,6 +497,8 @@ function iniciarTurno() {
 
             noche.classList.add("oculto");
 
+            document.body.classList.add("tema-dia");   // ← agregar esta línea
+
         }
 
         else {
@@ -505,6 +507,7 @@ function iniciarTurno() {
 
             noche.classList.remove("oculto");
 
+            document.body.classList.remove("tema-dia"); // ← agregar esta línea
         }
 
     }
