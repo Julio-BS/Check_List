@@ -693,7 +693,41 @@ function iniciarOrdenConductores(
 
     let estados = {};
 
+        // ==========================================
+// FUNCIÓN INTERNA DE RESET
+// ORDEN DE CONDUCTORES
+// ==========================================
 
+bloque._resetOrdenConductores =
+    function () {
+
+        // Eliminar estados guardados
+        estados = {};
+
+
+        // Vaciar selector
+        selector.innerHTML = "";
+
+        selector.classList.remove(
+            "activo"
+        );
+
+
+        // Eliminar vehículos mostrados
+        contenedor.innerHTML = "";
+
+
+        // Restaurar botón
+        botonSeleccionar.textContent =
+            "Seleccionar unidades";
+
+
+        // Volver estado general a F
+        actualizarOrdenGeneral(
+            bloque
+        );
+
+    };
 
     botonSeleccionar.addEventListener(
         "click",
@@ -1746,3 +1780,483 @@ iniciarMatrices();
 iniciarDownload();
 
 iniciarTurno();
+
+// =====================================================
+// RESET - MATRICES
+// =====================================================
+
+function resetMatrices() {
+
+    const tareas =
+        document.querySelectorAll(
+            ".seccion-matrices .tarea"
+        );
+
+
+    tareas.forEach((tarea) => {
+
+
+        // Volver estado a F
+
+        tarea.classList.remove(
+            "en-proceso",
+            "completado"
+        );
+
+
+        tarea.classList.add(
+            "sin-completar"
+        );
+
+
+        const boton =
+            tarea.querySelector(
+                ".boton-estado"
+            );
+
+
+        boton.textContent =
+            "F";
+
+
+        // Cerrar desplegable
+
+        const menu =
+            tarea.querySelector(
+                ".menu-estado"
+            );
+
+
+        menu.classList.remove(
+            "activo"
+        );
+
+
+
+        // ======================================
+        // RESTAURAR NOMBRES ESPECIALES
+        // ======================================
+
+        const nombre =
+            tarea.querySelector(
+                ".nombre-tarea"
+            );
+
+
+        const nuevoNombre =
+            tarea.dataset.nuevoNombre;
+
+
+
+        if (
+            nuevoNombre === "G, ADAS"
+        ) {
+
+            nombre.textContent =
+                "ADAS";
+
+            tarea.dataset.transformar =
+                "true";
+
+        }
+
+
+        else if (
+            nuevoNombre === "GESTIÓN EVENTOS"
+        ) {
+
+            nombre.textContent =
+                "DMS";
+
+            tarea.dataset.transformar =
+                "true";
+
+        }
+
+
+        else if (
+            nuevoNombre === "TRANSGRESIONES"
+        ) {
+
+            nombre.textContent =
+                "GEOCERCA";
+
+            tarea.dataset.transformar =
+                "true";
+
+        }
+
+    });
+
+}
+
+
+
+// =====================================================
+// RESET - DOWNLOAD
+// =====================================================
+
+function resetDownload() {
+
+    const categorias =
+        document.querySelectorAll(
+            ".download-categoria"
+        );
+
+
+    categorias.forEach(
+        (categoria) => {
+
+
+            const selector =
+                categoria.querySelector(
+                    ".selector-unidades"
+                );
+
+
+            const seleccionadas =
+                categoria.querySelector(
+                    ".unidades-seleccionadas"
+                );
+
+
+            const boton =
+                categoria.querySelector(
+                    ".btn-seleccionar-unidades"
+                );
+
+
+            // Vaciar selector
+
+            selector.innerHTML =
+                "";
+
+
+            selector.classList.remove(
+                "activo"
+            );
+
+
+            // Eliminar unidades elegidas
+
+            seleccionadas.innerHTML =
+                "";
+
+
+            // Restaurar botón
+
+            boton.style.display =
+                "";
+
+
+            boton.textContent =
+                "Seleccionar";
+
+        }
+    );
+
+}
+
+
+
+// =====================================================
+// RESET - TURNO
+// =====================================================
+
+function resetTurno() {
+
+
+    const seccion =
+        document.querySelector(
+            ".seccion-turno"
+        );
+
+
+    // ======================================
+    // VOLVER A TURNO DÍA
+    // ======================================
+
+    const selectorTurno =
+        seccion.querySelector(
+            "#selector-turno"
+        );
+
+
+    const turnoDia =
+        seccion.querySelector(
+            "#turno-dia"
+        );
+
+
+    const turnoNoche =
+        seccion.querySelector(
+            "#turno-noche"
+        );
+
+
+    selectorTurno.value =
+        "dia";
+
+
+    turnoDia.classList.remove(
+        "oculto"
+    );
+
+
+    turnoNoche.classList.add(
+        "oculto"
+    );
+
+
+
+    // ======================================
+    // RESTAURAR FILAS F / C
+    // ======================================
+
+    const filas =
+        seccion.querySelectorAll(
+            ".turno-fila"
+        );
+
+
+    filas.forEach((fila) => {
+
+
+        fila.classList.remove(
+            "turno-completado"
+        );
+
+
+        fila.classList.add(
+            "turno-faltante"
+        );
+
+
+        const boton =
+            fila.querySelector(
+                ".turno-boton-fc"
+            );
+
+
+        if (boton) {
+
+            boton.textContent =
+                "F";
+
+        }
+
+
+        const indicador =
+            fila.querySelector(
+                ".turno-indicador-general"
+            );
+
+
+        if (indicador) {
+
+            indicador.textContent =
+                "F";
+
+        }
+
+    });
+
+
+
+    // ======================================
+    // ORDEN DE CONDUCTORES
+    // DÍA + NOCHE
+    // ======================================
+
+    const bloquesOrden =
+        seccion.querySelectorAll(
+            ".bloque-orden-conductores"
+        );
+
+
+    bloquesOrden.forEach(
+        (bloque) => {
+
+
+            if (
+                bloque._resetOrdenConductores
+            ) {
+
+                bloque._resetOrdenConductores();
+
+            }
+
+        }
+    );
+
+
+
+    // ======================================
+    // RESET EDDY
+    // ======================================
+
+    const bloquesEddy =
+        seccion.querySelectorAll(
+            ".bloque-eddy"
+        );
+
+
+    bloquesEddy.forEach((bloque) => {
+
+
+        const etiqueta =
+            bloque.querySelector(
+                ".pregunta-etiqueta"
+            );
+
+
+        pintarRojoTurno(
+            etiqueta
+        );
+
+
+        const preguntaPedido =
+            bloque.querySelector(
+                ".eddy-pregunta-pedido"
+            );
+
+
+        const preguntaRealizado =
+            bloque.querySelector(
+                ".eddy-pregunta-realizado"
+            );
+
+
+        preguntaPedido.classList.remove(
+            "oculto"
+        );
+
+
+        preguntaRealizado.classList.add(
+            "oculto"
+        );
+
+
+        bloque
+            .querySelectorAll(
+                ".opciones-si-no button"
+            )
+            .forEach((boton) => {
+
+                boton.classList.remove(
+                    "seleccionado"
+                );
+
+            });
+
+    });
+
+
+
+    // ======================================
+    // RESET PROGRAMACIÓN DE RELOJ
+    // ======================================
+
+    const reloj =
+        seccion.querySelector(
+            ".bloque-reloj"
+        );
+
+
+    if (reloj) {
+
+
+        const general =
+            reloj.querySelector(
+                ".reloj-general"
+            );
+
+
+        pintarRojoTurno(
+            general
+        );
+
+
+        const existe =
+            reloj.querySelector(
+                ".pregunta-existe"
+            );
+
+
+        const realizo =
+            reloj.querySelector(
+                ".pregunta-realizo"
+            );
+
+
+        const correo =
+            reloj.querySelector(
+                ".pregunta-correo"
+            );
+
+
+        existe.classList.remove(
+            "oculto"
+        );
+
+
+        realizo.classList.add(
+            "oculto"
+        );
+
+
+        correo.classList.add(
+            "oculto"
+        );
+
+
+        reloj
+            .querySelectorAll(
+                ".opciones-si-no button"
+            )
+            .forEach((boton) => {
+
+                boton.classList.remove(
+                    "seleccionado"
+                );
+
+            });
+
+    }
+
+}
+
+
+
+// =====================================================
+// BOTONES RESET
+// =====================================================
+
+document
+    .querySelector(
+        "#reset-matrices"
+    )
+    .addEventListener(
+        "click",
+        resetMatrices
+    );
+
+
+document
+    .querySelector(
+        "#reset-download"
+    )
+    .addEventListener(
+        "click",
+        resetDownload
+    );
+
+
+document
+    .querySelector(
+        "#reset-turno"
+    )
+    .addEventListener(
+        "click",
+        resetTurno
+    );
